@@ -64,7 +64,7 @@
                   plans?
                   Add your business on the
                   map or press the button
-                  “Get help”
+                  <strong>“Get help”</strong>
                 </h3>
               </md-card-content>
             </md-card>
@@ -76,7 +76,7 @@
                   help? Add your
                   suggestion on the map
                   or press the button
-                  “Offer help”
+                  <strong>“Offer help”</strong>
                 </h3>
               </md-card-content>
             </md-card>
@@ -85,7 +85,7 @@
                 <h3 class="card-description">
                   If your business already
                   solved all problem press
-                  the button “Reborn”
+                  the button <strong>“Reborn”</strong>
                 </h3>
               </md-card-content>
             </md-card>
@@ -109,7 +109,6 @@
                 card-avatar
                 :shadow-normal="false"
                 :no-colored-shadow="false"
-                :card-image="cardProfile3.cardProfile1"
               >
                 <template slot="cardContent">
                   <h4 class="card-title">Alec Thompson</h4>
@@ -127,7 +126,6 @@
                 card-avatar
                 :shadow-normal="false"
                 :no-colored-shadow="false"
-                :card-image="cardProfile3.cardProfile4"
               >
                 <template slot="cardContent">
                   <h4 class="card-title">George West</h4>
@@ -145,7 +143,6 @@
                 card-avatar
                 :shadow-normal="false"
                 :no-colored-shadow="false"
-                :card-image="cardProfile3.cardProfile3"
               >
                 <template slot="cardContent">
                   <h4 class="card-title">Gina Andrew</h4>
@@ -217,11 +214,6 @@ export default {
       email: null,
       password: null,
       leafShow: false,
-      cardProfile3: {
-        cardProfile1: require("@/assets/img/faces/card-profile1-square.jpg"),
-        cardProfile2: require("@/assets/img/faces/card-profile6-square.jpg"),
-        cardProfile3: require("@/assets/img/faces/card-profile4-square.jpg"),
-      },
       team4: require("@/assets/img/bg7.jpg"),
       team5: require("@/assets/img/examples/city.jpg")
     };
