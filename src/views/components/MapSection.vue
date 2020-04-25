@@ -1,9 +1,9 @@
 <template>
   <div id="map" style="width: 100%; margin-top: 70px">
-    <div class="md-layout" style="height: 1100px;">
+    <div class="md-layout">
       <div
-        class="md-layout-item"
-        style="height: 100%"
+        class="md-layout-item md-small-size-100"
+        style="height: 1100px; margin-bottom: 40px"
         :class="(showGetHelp || showOfferHelp || showReborn)?'md-size-60':'md-size-100'"
       >
         <l-map
@@ -274,7 +274,7 @@
         </md-card>
       </div>
     </div>
-    <div class="button-layout md-layout" style="margin: 100px auto 0; justify-content: center">
+    <div class="button-layout md-layout" style="margin: 150px auto 0; justify-content: center">
       <div class="md-layout-item md-size-30">
         <v-popover offset="4" placement="top">
           <md-button :disabled="showReborn || showOfferHelp" class="md-danger md-lg">Get Help</md-button>
@@ -394,6 +394,7 @@ export default {
       this.currentCenter = center;
     },
     addMarker(event) {
+      this.showReborn = false
       if (!this.showGetHelp && !this.showOfferHelp) {
         this.center = event.latlng;
         //this.markers.push(event.latlng);

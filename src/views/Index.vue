@@ -29,25 +29,25 @@
             </div>
           </div>
           <div class="md-layout">
-            <div class="md-layout-item md-size-25 md-small-size-100">
+            <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="info" text-center>
                 <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Business on platform</h4>
               </info-areas>
             </div>
-            <div class="md-layout-item md-size-25 md-small-size-100">
+            <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="info" text-center>
                 <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Job positions in danger</h4>
               </info-areas>
             </div>
-            <div class="md-layout-item md-size-25 md-small-size-100">
+            <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="success" text-center>
                 <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Business rescued</h4>
               </info-areas>
             </div>
-            <div class="md-layout-item md-size-25 md-small-size-100">
+            <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="danger" text-center>
                 <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Job positions recued</h4>
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="md-layout" style="justify-content: space-between">
-            <md-card class="bg-warning md-layout-item md-size-30">
+            <md-card class="bg-warning md-layout-item md-size-30 md-small-size-100">
               <md-card-content>
                 <h3 class="card-description">
                   You are a business and need help?
@@ -63,7 +63,7 @@
                 </h3>
               </md-card-content>
             </md-card>
-            <md-card class="bg-warning md-layout-item md-size-30">
+            <md-card class="bg-warning md-layout-item md-size-30 md-small-size-100">
               <md-card-content>
                 <h3 class="card-description">
                   You have or want to work on a solution that helps businesses in need?
@@ -71,10 +71,11 @@
                 </h3>
               </md-card-content>
             </md-card>
-            <md-card class="bg-warning md-layout-item md-size-30">
+            <md-card class="bg-warning md-layout-item md-size-30 md-small-size-100">
               <md-card-content>
                 <h3 class="card-description">
-                  Your business has been rescued by the help offered to you, <strong>“Reborn”</strong> your business and share the stories with others.
+                  Your business has been rescued by the help offered to you,
+                  <strong>“Reborn”</strong> your business and share the stories with others.
                 </h3>
               </md-card-content>
             </md-card>
@@ -85,7 +86,11 @@
         </div>
       </div>
       <!-- Team 4 -->
-      <div class="section section-team-4 section-image" style="margin-top: 100px" :style="sectionTeam(team4)">
+      <div
+        class="section section-team-4 section-image"
+        style="margin-top: 100px"
+        :style="sectionTeam(team4)"
+      >
         <div class="container">
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center">
@@ -94,11 +99,7 @@
           </div>
           <div class="md-layout">
             <div class="md-layout-item md-size-33 md-small-size-100">
-              <profile-card
-                card-avatar
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
+              <profile-card card-avatar :shadow-normal="false" :no-colored-shadow="false">
                 <template slot="cardContent">
                   <h4 class="card-title">Alec Thompson</h4>
                   <h6 class="card-category text-muted">Ceo/Co-Founder</h6>
@@ -111,11 +112,7 @@
               </profile-card>
             </div>
             <div class="md-layout-item md-size-33 md-small-size-100">
-              <profile-card
-                card-avatar
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
+              <profile-card card-avatar :shadow-normal="false" :no-colored-shadow="false">
                 <template slot="cardContent">
                   <h4 class="card-title">George West</h4>
                   <h6 class="card-category text-muted">Backend Hacker</h6>
@@ -128,11 +125,7 @@
               </profile-card>
             </div>
             <div class="md-layout-item md-size-33 md-small-size-100">
-              <profile-card
-                card-avatar
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
+              <profile-card card-avatar :shadow-normal="false" :no-colored-shadow="false">
                 <template slot="cardContent">
                   <h4 class="card-title">Gina Andrew</h4>
                   <h6 class="card-category text-muted">Web Designer</h6>
@@ -239,6 +232,19 @@ export default {
 
 .vertical-nav-active {
   display: block;
+}
+
+@media all and (min-width: 600px) {
+  .md-xsmall-size-100 {
+    .info {
+      padding: 0;
+    }
+    &:last-child {
+      .info {
+        padding-bottom: 30px;
+      }
+    }
+  }
 }
 
 @media all and (min-width: 991px) {
