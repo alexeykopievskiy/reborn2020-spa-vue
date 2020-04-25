@@ -31,25 +31,25 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-25 md-small-size-100">
               <info-areas icon-color="info" text-center>
-                <h2 slot="title" class="info-title">107 808</h2>
+                <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Business on platform</h4>
               </info-areas>
             </div>
             <div class="md-layout-item md-size-25 md-small-size-100">
               <info-areas icon-color="info" text-center>
-                <h2 slot="title" class="info-title">107 808</h2>
+                <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Job positions in danger</h4>
               </info-areas>
             </div>
             <div class="md-layout-item md-size-25 md-small-size-100">
               <info-areas icon-color="success" text-center>
-                <h2 slot="title" class="info-title">325 628</h2>
+                <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Business rescued</h4>
               </info-areas>
             </div>
             <div class="md-layout-item md-size-25 md-small-size-100">
               <info-areas icon-color="danger" text-center>
-                <h2 slot="title" class="info-title">17 808</h2>
+                <h2 slot="title" class="info-title">0</h2>
                 <h4 slot="content">Job positions recued</h4>
               </info-areas>
             </div>
@@ -58,12 +58,7 @@
             <md-card class="bg-warning md-layout-item md-size-30">
               <md-card-content>
                 <h3 class="card-description">
-                  You are entrepreneur or
-                  enterprise and you have
-                  issue with your future
-                  plans?
-                  Add your business on the
-                  map or press the button
+                  You are a business and need help?
                   <strong>“Get help”</strong>
                 </h3>
               </md-card-content>
@@ -71,11 +66,7 @@
             <md-card class="bg-warning md-layout-item md-size-30">
               <md-card-content>
                 <h3 class="card-description">
-                  You have a solution for
-                  business, and you can
-                  help? Add your
-                  suggestion on the map
-                  or press the button
+                  You have or want to work on a solution that helps businesses in need?
                   <strong>“Offer help”</strong>
                 </h3>
               </md-card-content>
@@ -83,9 +74,7 @@
             <md-card class="bg-warning md-layout-item md-size-30">
               <md-card-content>
                 <h3 class="card-description">
-                  If your business already
-                  solved all problem press
-                  the button <strong>“Reborn”</strong>
+                  Your business has been rescued by the help offered to you, <strong>“Reborn”</strong> your business and share the stories with others.
                 </h3>
               </md-card-content>
             </md-card>
