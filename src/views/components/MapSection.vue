@@ -130,7 +130,7 @@
               </md-field>
             </md-card-content>
             <md-card-actions class="d-flex justify-content-between">
-              <md-button @click="showGetHelp = false; removeMarker()" class="md-danger">Cancel</md-button>
+              <md-button @click="showGetHelp = false; removeMarker(); resizeMap()" class="md-danger">Cancel</md-button>
               <md-button type="submit" class="md-warning">Submit</md-button>
             </md-card-actions>
           </form>
@@ -232,8 +232,8 @@
               </md-field>
             </md-card-content>
             <md-card-actions class="d-flex justify-content-between">
-              <md-button @click="showOfferHelp = false; removeMarker()" class="md-danger">Cancel</md-button>
-              <md-button class="md-warning">Send Message</md-button>
+              <md-button @click="showOfferHelp = false; removeMarker(); resizeMap()" class="md-danger">Cancel</md-button>
+              <md-button class="md-warning">Submit</md-button>
             </md-card-actions>
           </form>
         </md-card>
@@ -267,8 +267,8 @@
               </md-field>
             </md-card-content>
             <md-card-actions class="d-flex justify-content-between">
-              <md-button @click="showReborn = false; removeMarker()" class="md-danger">Cancel</md-button>
-              <md-button class="md-warning">Send Message</md-button>
+              <md-button @click="showReborn = false; removeMarker(); resizeMap()" class="md-danger">Cancel</md-button>
+              <md-button class="md-warning">Submit</md-button>
             </md-card-actions>
           </form>
         </md-card>
@@ -277,7 +277,7 @@
     <div class="button-layout md-layout" style="margin: 100px auto 0; justify-content: center">
       <div class="md-layout-item md-size-30">
         <v-popover offset="4" placement="top">
-          <md-button class="md-danger md-lg">Get Help</md-button>
+          <md-button :disabled="showReborn || showOfferHelp" class="md-danger md-lg">Get Help</md-button>
 
           <template slot="popover">
             <h3 class="popover-header">Please add your business on the map</h3>
@@ -290,12 +290,14 @@
           v-scroll-to="'#map'"
           @click="showOfferHelp = true; showGetHelp = false"
           class="md-info md-lg"
+          :disabled="showGetHelp || showReborn"
         >Offer Help</md-button>
       </div>
       <div class="md-layout-item md-size-30">
         <md-button
           class="md-success md-lg"
-          @click="showReborn = true; showOfferHelp = false; showGetHelp = false; removeMarker()"
+          :disabled="showGetHelp || showOfferHelp"
+          @click="showReborn = true; showOfferHelp = false; showGetHelp = false; removeMarker(); resizeMap()"
         >Reborn</md-button>
       </div>
     </div>
@@ -392,13 +394,23 @@ export default {
       this.currentCenter = center;
     },
     addMarker(event) {
-      if (!this.showGetHelp) {
+      if (!this.showGetHelp && !this.showOfferHelp) {
         this.center = event.latlng;
         //this.markers.push(event.latlng);
         this.current_coords = event.latlng;
         this.$refs.map.mapObject.invalidateSize();
         this.showGetHelp = true;
         this.showOfferHelp = false;
+        this.getAddressByCoords(event.latlng);
+      }
+
+      if (!this.showGetHelp && this.showOfferHelp) {
+        this.center = event.latlng;
+        //this.markers.push(event.latlng);
+        this.current_coords = event.latlng;
+        this.$refs.map.mapObject.invalidateSize();
+        this.showGetHelp = false;
+        this.showOfferHelp = true;
         this.getAddressByCoords(event.latlng);
       }
     },
