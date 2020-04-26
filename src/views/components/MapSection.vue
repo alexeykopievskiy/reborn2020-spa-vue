@@ -445,7 +445,7 @@ export default {
           "http://167.71.69.171:5000/api/v1/company",
           data
         );
-        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
         console.log(response, "getHelp");
       } catch (e) {
       } finally {
@@ -489,7 +489,7 @@ export default {
           "http://167.71.69.171:5000/api/v1/company",
           data
         );
-        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
         console.log(response, "offerHelp");
       } catch (e) {
       } finally {
@@ -516,7 +516,7 @@ export default {
           "http://167.71.69.171:5000/api/v1/company",
           data
         );
-        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
         console.log(response, "story");
       } catch (e) {
       } finally {
@@ -543,7 +543,7 @@ export default {
         let response = await this.axios.get(
           "http://167.71.69.171:5000/api/v1/getAllMarkers"
         );
-        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
         console.log(response, "markers");
         this.markers = response.data;
       } catch (e) {
