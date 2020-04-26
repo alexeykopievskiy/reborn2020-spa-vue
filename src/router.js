@@ -3,6 +3,8 @@ import Router from "vue-router";
 
 //  Main Pages
 import Index from "./views/Index.vue";
+import About from "./views/About.vue";
+import Policy from "./views/Policy.vue";
 
 import MainFooter from "./layout/MainFooter.vue";
 
@@ -16,6 +18,16 @@ export default new Router({
       name: "index",
       components: { default: Index, /*header: MainNavbar,*/ footer: MainFooter }
     },
+    {
+      path: "/about",
+      name: "about",
+      components: { default: About, /*header: MainNavbar,*/ footer: MainFooter }
+    },
+    {
+      path: "/policy",
+      name: "policy",
+      components: { default: Policy, /*header: MainNavbar,*/ footer: MainFooter }
+    }
   ],
   scrollBehavior: to => {
     if (to.hash) {
