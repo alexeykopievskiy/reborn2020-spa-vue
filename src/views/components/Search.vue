@@ -7,7 +7,7 @@
           <md-input v-model="search" @input="() => delayInput(this)"></md-input>
         </md-field>
       </div>
-      <div v-if="companies" class="search-result">
+      <div v-if="companies.length" class="search-result">
         <md-table>
           <md-table-row>
             <md-table-head>Type</md-table-head>
@@ -20,7 +20,7 @@
             <md-table-head>Needs</md-table-head>
           </md-table-row>
 
-          <md-table-row v-for="company in companies" :key="company._id">
+          <md-table-row v-for="company in companies.slice(offset, offset+limit)" :key="company._id">
             <md-table-cell>{{ company.type }}</md-table-cell>
             <md-table-cell>{{ company.name }}</md-table-cell>
             <md-table-cell>{{ country(company.address) }}</md-table-cell>
@@ -31,6 +31,15 @@
             <md-table-cell>{{ company.needs }}</md-table-cell>
           </md-table-row>
         </md-table>
+
+        <Pagination
+        	v-if="companies.length > limit"
+			    v-model="page"
+			    :per-page="limit"
+			    :total="companies.length"
+			    class="pagination"
+			    >
+			  </Pagination>
       </div>
     </div>
   </div>
@@ -39,6 +48,7 @@
 <script>
 	import debounce from 'lodash/debounce'
 	import { API_SERVER } from "@/API_KEY"
+	import { Pagination } from '@/components'
 
 	export default {
 		name: "Search",
@@ -46,9 +56,21 @@
 		data() {
     	return {
     		search: null,
-    		companies: []
+    		companies: [],
+    		page: 1,    		
+    		limit: 10
     	}
     },
+
+    components: {
+		  Pagination
+		},
+
+		computed: {
+			offset() {
+				return (this.page - 1) * this.limit
+			}
+		},
 
     methods: {
       delayInput: debounce((vm) => {
@@ -64,6 +86,8 @@
 	}
 </script>
 
-<style>
-	
+<style lang="scss" scoped>
+	.pagination {
+		justify-content: center;
+	}
 </style>
