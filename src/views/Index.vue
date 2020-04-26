@@ -235,6 +235,10 @@ export default {
 }
 
 @media all and (min-width: 600px) {
+  .main-raised {
+    margin-left: 50px!important;
+    margin-right: 50px!important;
+  }
   .md-xsmall-size-100 {
     .info {
       padding: 0;

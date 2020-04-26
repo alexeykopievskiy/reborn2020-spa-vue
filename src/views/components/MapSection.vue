@@ -20,9 +20,9 @@
           <l-tile-layer :url="url" :attribution="attribution" />
           <l-marker
             v-for="(marker) in markersHelp"
-            :key="marker.lat"
+            :key="marker[0].lat"
             :icon="iconRed"
-            :lat-lng="marker"
+            :lat-lng="marker[0]"
             :draggable="false"
           >
             <l-popup>
@@ -33,9 +33,9 @@
           </l-marker>
           <l-marker
             v-for="(marker) in markersOffer"
-            :key="marker.lat"
+            :key="marker[0].lat"
             :icon="iconGreen"
-            :lat-lng="marker"
+            :lat-lng="marker[0]"
             :draggable="false"
           >
             <l-popup>
@@ -130,7 +130,10 @@
               </md-field>
             </md-card-content>
             <md-card-actions class="d-flex justify-content-between">
-              <md-button @click="showGetHelp = false; removeMarker(); resizeMap()" class="md-danger">Cancel</md-button>
+              <md-button
+                @click="showGetHelp = false; removeMarker(); resizeMap()"
+                class="md-danger"
+              >Cancel</md-button>
               <md-button type="submit" class="md-warning">Submit</md-button>
             </md-card-actions>
           </form>
@@ -232,8 +235,11 @@
               </md-field>
             </md-card-content>
             <md-card-actions class="d-flex justify-content-between">
-              <md-button @click="showOfferHelp = false; removeMarker(); resizeMap()" class="md-danger">Cancel</md-button>
-              <md-button class="md-warning">Submit</md-button>
+              <md-button
+                @click="showOfferHelp = false; removeMarker(); resizeMap()"
+                class="md-danger"
+              >Cancel</md-button>
+              <md-button type="submit" class="md-warning">Submit</md-button>
             </md-card-actions>
           </form>
         </md-card>
@@ -267,15 +273,18 @@
               </md-field>
             </md-card-content>
             <md-card-actions class="d-flex justify-content-between">
-              <md-button @click="showReborn = false; removeMarker(); resizeMap()" class="md-danger">Cancel</md-button>
-              <md-button class="md-warning">Submit</md-button>
+              <md-button
+                @click="showReborn = false; removeMarker(); resizeMap()"
+                class="md-danger"
+              >Cancel</md-button>
+              <md-button type="submit" class="md-warning">Submit</md-button>
             </md-card-actions>
           </form>
         </md-card>
       </div>
     </div>
     <div class="button-layout md-layout" style="margin: 150px auto 0; justify-content: center">
-      <div class="md-layout-item md-size-30">
+      <div class="md-layout-item md-size-30 md-xsmall-size-100">
         <v-popover offset="4" placement="top">
           <md-button :disabled="showReborn || showOfferHelp" class="md-danger md-lg">Get Help</md-button>
 
@@ -285,7 +294,7 @@
           </template>
         </v-popover>
       </div>
-      <div class="md-layout-item md-size-30">
+      <div class="md-layout-item md-size-30 md-xsmall-size-100">
         <md-button
           v-scroll-to="'#map'"
           @click="showOfferHelp = true; showGetHelp = false"
@@ -293,7 +302,7 @@
           :disabled="showGetHelp || showReborn"
         >Offer Help</md-button>
       </div>
-      <div class="md-layout-item md-size-30">
+      <div class="md-layout-item md-size-30 md-xsmall-size-100">
         <md-button
           class="md-success md-lg"
           :disabled="showGetHelp || showOfferHelp"
@@ -323,8 +332,6 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
       currentZoom: 11.5,
       currentCenter: latLng(47.41322, -1.219482),
       showParagraph: false,
@@ -332,21 +339,9 @@ export default {
         zoomSnap: 0.5
       },
       showMap: true,
-      markers: [
-        latLng(46.41322, -2.219482),
-        latLng(45.41322, -4.219482),
-        latLng(47.41322, -1.219482)
-      ],
-      markersHelp: [
-        latLng(48.41322, -2.219482),
-        latLng(43.41322, -4.219482),
-        latLng(44.41322, -1.219482)
-      ],
-      markersOffer: [
-        latLng(46.41322, -1.219482),
-        latLng(41.41322, -2.219482),
-        latLng(42.41322, -3.219482)
-      ],
+      markers: [],
+      markersHelp: [],
+      markersOffer: [],
       showGetHelp: false,
       showOfferHelp: false,
       email: null,
@@ -394,7 +389,7 @@ export default {
       this.currentCenter = center;
     },
     addMarker(event) {
-      this.showReborn = false
+      this.showReborn = false;
       if (!this.showGetHelp && !this.showOfferHelp) {
         this.center = event.latlng;
         //this.markers.push(event.latlng);
@@ -427,8 +422,9 @@ export default {
     async searchByAddress() {
       console.log("eeee");
     },
-    submitGetHelp(e) {
+    async submitGetHelp(e) {
       let data = {
+        type: "needHelp",
         name: this.name,
         address: this.address,
         coords: this.current_coords,
@@ -444,7 +440,20 @@ export default {
         phone: this.phone
       };
 
-      this.markers.push(this.current_coords);
+      try {
+        let response = await this.axios.post(
+          "http://167.71.69.171:5000/api/v1/company",
+          data
+        );
+        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        console.log(response, "getHelp");
+      } catch (e) {
+      } finally {
+        this.current_coords = null;
+        this.getMarkers();
+      }
+
+      //this.markers.push(this.current_coords);
       this.current_coords = null;
       this.resizeMap();
       this.showGetHelp = false;
@@ -455,8 +464,9 @@ export default {
       this.center = this.currentCenter;
       this.$refs.map.mapObject.invalidateSize();
     },
-    submitOfferHelp(e) {
+    async submitOfferHelp(e) {
       let data = {
+        type: "offerHelp",
         name: this.name,
         address: this.address,
         coords: this.current_coords,
@@ -473,9 +483,25 @@ export default {
       };
 
       console.log(data, "object");
+
+      try {
+        let response = await this.axios.post(
+          "http://167.71.69.171:5000/api/v1/company",
+          data
+        );
+        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        console.log(response, "offerHelp");
+      } catch (e) {
+      } finally {
+        this.current_coords = null;
+        this.getMarkers();
+        this.resizeMap();
+        this.showOfferHelp = false;
+      }
     },
-    submitStory(e) {
+    async submitStory(e) {
       let data = {
+        type: "story",
         name: this.name,
         company_name: this.company_name,
         story: this.story,
@@ -484,6 +510,17 @@ export default {
       };
 
       console.log(data, "object");
+
+      try {
+        let response = await this.axios.post(
+          "http://167.71.69.171:5000/api/v1/company",
+          data
+        );
+        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        console.log(response, "story");
+      } catch (e) {
+      } finally {
+      }
     },
     async getAddressByCoords(coords) {
       try {
@@ -500,7 +537,46 @@ export default {
       this.getAddressByCoords(coords);
       this.current_coords = coords;
       this.center = this.currentCenter;
+    },
+    async getMarkers() {
+      try {
+        let response = await this.axios.get(
+          "http://167.71.69.171:5000/api/v1/getAllMarkers"
+        );
+        //let response = await this.axios.get('http://localhost:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        console.log(response, "markers");
+        this.markers = response.data;
+      } catch (e) {
+      } finally {
+      }
+
+      let helpMarkers = this.markers.map(item => {
+        if (item[2] == "needHelp") {
+          this.markersHelp.push(item);
+        }
+      });
+
+      let offerMarkers = this.markers.map(item => {
+        if (item[2] == "offerHelp") {
+          this.markersOffer.push(item);
+        }
+      });
+
+      console.log(this.markersHelp.length, "12389");
+
+      console.log(this.markers, "mark data");
     }
+  },
+  mounted() {
+    this.getMarkers();
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.button-layout {
+  button {
+    margin-bottom: 20px;
+  }
+}
+</style>
