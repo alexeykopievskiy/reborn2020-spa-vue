@@ -442,7 +442,7 @@ export default {
 
       try {
         let response = await this.axios.post(
-          "http://167.71.69.171:5000/api/v1/company",
+          "https://reborn2020.co:5000/api/v1/company",
           data
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
@@ -486,7 +486,7 @@ export default {
 
       try {
         let response = await this.axios.post(
-          "http://167.71.69.171:5000/api/v1/company",
+          "https://reborn2020.co:5000/api/v1/company",
           data
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
@@ -513,7 +513,7 @@ export default {
 
       try {
         let response = await this.axios.post(
-          "http://167.71.69.171:5000/api/v1/company",
+          "https://reborn2020.co:5000/api/v1/company",
           data
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
@@ -541,7 +541,7 @@ export default {
     async getMarkers() {
       try {
         let response = await this.axios.get(
-          "http://167.71.69.171:5000/api/v1/getAllMarkers"
+          "https://reborn2020.co:5000/api/v1/getAllMarkers"
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
         console.log(response, "markers");
