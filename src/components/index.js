@@ -12,6 +12,7 @@ import TestimonialCard from "./cards/TestimonialCard.vue";
 import ProductCard from "./cards/ProductCard.vue";
 import Collapse from "./Collapse.vue";
 import InfoAreas from "./InfoAreas.vue";
+import Pagination from "./Pagination.vue";
 
 export {
   DropDown,
@@ -27,5 +28,6 @@ export {
   TestimonialCard,
   ProductCard,
   Collapse,
-  InfoAreas
+  InfoAreas,
+  Pagination
 };

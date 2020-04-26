@@ -141,6 +141,7 @@
         </div>
       </div>
       <!-- end Team 4 -->
+      <Search/>
     </div>
   </div>
 </template>
@@ -148,6 +149,7 @@
 <script>
 import Mixins from "@/plugins/basicMixins";
 import MapSection from "./components/MapSection";
+import Search from "./components/Search";
 import { InfoAreas } from "@/components";
 import { ProfileCard } from "@/components";
 
@@ -156,7 +158,8 @@ export default {
   components: {
     MapSection,
     InfoAreas,
-    ProfileCard
+    ProfileCard,
+    Search
   },
   mixins: [Mixins.VerticalNav, Mixins.HeaderImage],
   bodyClass: "index-page",
