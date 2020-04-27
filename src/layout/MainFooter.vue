@@ -10,11 +10,11 @@
     <template v-if="$route.name !== 'ecommerce-page' && $route.name !== 'presentation'">
       <div class="container">
         <nav>
-          <!--<ul>
+          <ul>
             <li>
-              <a href="https://www.creative-tim.com">Reborn 2020</a>
+              <a href="/about">About</a>
             </li>
-          </ul>-->
+          </ul>
         </nav>
         <div class="copyright">
           &copy; {{ year }}, made with

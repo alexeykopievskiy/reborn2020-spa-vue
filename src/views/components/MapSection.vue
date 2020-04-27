@@ -24,26 +24,68 @@
             :icon="iconRed"
             :lat-lng="marker[0]"
             :draggable="false"
+            @click="getCompanyInfo(marker[1])"
           >
             <l-popup>
               <md-card-header class="md-card-header-info text-center">
                 <h4 class="card-title">Need help</h4>
               </md-card-header>
+              <md-card-content>
+                <strong>Name: </strong>
+                <span>{{loadInfo.name || '---'}}</span>
+                <br />
+                <strong>Address: </strong>
+                <span>{{loadInfo.address || '---'}}</span>
+                <br />
+                <strong>Business: </strong>
+                <span>{{loadInfo.business || loadInfo.business_other || '---'}}</span>
+                <br />
+                <strong>Issues: </strong>
+                <span>{{loadInfo.issues || loadInfo.issues_other || '---'}}</span>
+                <br />
+                <strong>Help: </strong>
+                <span>{{loadInfo.help || loadInfo.help_other || '---'}}</span>
+              </md-card-content>
             </l-popup>
           </l-marker>
-          <l-marker
-            v-for="(marker) in markersOffer"
-            :key="marker[0].lat"
-            :icon="iconGreen"
-            :lat-lng="marker[0]"
-            :draggable="false"
-          >
-            <l-popup>
-              <md-card-header class="md-card-header-info text-center">
-                <h4 class="card-title">Offer help</h4>
-              </md-card-header>
-            </l-popup>
-          </l-marker>
+          <div class="lol">
+            <l-marker
+              v-for="(marker) in markersOffer"
+              :key="marker[0].lat"
+              :icon="iconGreen"
+              :lat-lng="marker[0]"
+              :draggable="false"
+              @click="getCompanyInfo(marker[1])"
+            >
+              <l-popup>
+                <md-card-header class="md-card-header-info text-center">
+                  <h4 class="card-title">Offering help</h4>
+                </md-card-header>
+                <md-card-content v-if="loadInfo">
+                  <strong>Name: </strong>
+                <span>{{loadInfo.name || '---'}}</span>
+                <br />
+                <strong>Address: </strong>
+                <span>{{loadInfo.address || '---'}}</span>
+                <br />
+                <strong>Business: </strong>
+                <span>{{loadInfo.business || loadInfo.business_other || '---'}}</span>
+                <br />
+                <strong>Isseus: </strong>
+                <span>{{loadInfo.issues || loadInfo.issues_other  || '---'}}</span>
+                <br />
+                <strong>Problem: </strong>
+                <span>{{loadInfo.problem || '---'}}</span>
+                <br />
+                <strong>Needs: </strong>
+                <span>{{loadInfo.needs || '---'}}</span>
+                <br />
+                <strong>Number of jobs: </strong>
+                <span>{{loadInfo.jobs || '---'}}</span>
+                </md-card-content>
+              </l-popup>
+            </l-marker>
+          </div>
           <l-marker
             :lat-lng="current_coords"
             :draggable="true"
@@ -379,7 +421,9 @@ export default {
         iconUrl: require("@/assets/img/blue.svg"),
         iconSize: [32, 37],
         iconAnchor: [16, 37]
-      })
+      }),
+      loadInfo: {},
+      isLoaded: false
     };
   },
   methods: {
@@ -411,17 +455,27 @@ export default {
         this.getAddressByCoords(event.latlng);
       }
     },
+    async getCompanyInfo(id) {
+      this.isLoaded = false;
+      try {
+        let response = await this.axios.get(
+          `${API_SERVER}:5000/api/v1/company/${id}`
+        );
+        //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
+        this.loadInfo = response.data;
+      } catch (e) {
+      } finally {
+        this.isLoaded = true;
+      }
+    },
     removeMarker() {
       this.center = this.currentCenter;
       this.current_coords = null;
-      console.log(this.markers.pop(), "kk");
       this.markers.pop();
       this.$refs.map.mapObject.invalidateSize();
       this.address = null;
-      console.log(this.markers);
     },
     async searchByAddress() {
-      console.log("eeee");
     },
     async submitGetHelp(e) {
       let data = {
@@ -447,7 +501,6 @@ export default {
           data
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
-        console.log(response, "getHelp");
       } catch (e) {
       } finally {
         this.current_coords = null;
@@ -459,7 +512,6 @@ export default {
       this.resizeMap();
       this.showGetHelp = false;
 
-      console.log(data, "object");
     },
     resizeMap() {
       this.center = this.currentCenter;
@@ -483,7 +535,6 @@ export default {
         phone: this.phone
       };
 
-      console.log(data, "object");
 
       try {
         let response = await this.axios.post(
@@ -491,7 +542,6 @@ export default {
           data
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
-        console.log(response, "offerHelp");
       } catch (e) {
       } finally {
         this.current_coords = null;
@@ -510,7 +560,6 @@ export default {
         phone: this.phone
       };
 
-      console.log(data, "object");
 
       try {
         let response = await this.axios.post(
@@ -518,7 +567,6 @@ export default {
           data
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
-        console.log(response, "story");
       } catch (e) {
       } finally {
       }
@@ -545,11 +593,13 @@ export default {
           `${API_SERVER}:5000/api/v1/getAllMarkers`
         );
         //let response = await this.axios.get('https://reborn2020.co:5000/api/v1/company/5ea4d5c5b57c0364b6e5f6e1')
-        console.log(response, "markers");
         this.markers = response.data;
       } catch (e) {
       } finally {
       }
+
+      this.markersHelp = [];
+      this.markersOffer = [];
 
       let helpMarkers = this.markers.map(item => {
         if (item[2] == "needHelp") {
@@ -563,9 +613,6 @@ export default {
         }
       });
 
-      console.log(this.markersHelp.length, "12389");
-
-      console.log(this.markers, "mark data");
     }
   },
   mounted() {
@@ -574,10 +621,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .button-layout {
   button {
     margin-bottom: 20px;
   }
+}
+.leaflet-popup-content {
+  min-width: 250px;
 }
 </style>

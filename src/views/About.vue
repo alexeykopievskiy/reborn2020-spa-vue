@@ -31,7 +31,15 @@
       <!-- Team 4 -->
       <div class="section">
         <div class="container">
-          <div class="md-layout">text</div>
+          <div class="md-layout" style="padding: 0 30px">
+            We are a group of individuals from six different countries around Europe, with EUvsVirus hackathon we suddenly turned into a connected and bound international team, willing to contribute and to be part of the solution in our fight against COVID19.
+            We are developers and professionals in the field of strategy, marketing and product development,
+            sharing the same purpose to make positive social impact.
+            <br />
+            <br />Our project Reborn 2020 wants to help businesses to recover from the current crisis, to reborn, a solution that connects businesses to each other, matching demand and solution by providing a map to visualize where these matches are.
+            This solution can also allow governments to easily identify where the most affected areas of business are and what type of problems they are facing commonly.
+            The application gives powerful and real time tool for evaluation problems in economy, in specific areas, in different sectors.
+          </div>
         </div>
       </div>
       <!-- end Team 4 -->

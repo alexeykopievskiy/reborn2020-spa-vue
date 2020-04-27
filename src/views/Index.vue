@@ -101,12 +101,10 @@
             <div class="md-layout-item md-size-33 md-small-size-100">
               <profile-card card-avatar :shadow-normal="false" :no-colored-shadow="false">
                 <template slot="cardContent">
-                  <h4 class="card-title">Alec Thompson</h4>
-                  <h6 class="card-category text-muted">Ceo/Co-Founder</h6>
+                  <h4 class="card-title">Luigi Patiano</h4>
+                  <h6 class="card-category text-muted">Restaurant owner</h6>
                   <p class="card-description">
-                    Don't be scared of the truth because we need to restart the
-                    human foundation in truth And I love you like Kanye loves
-                    Kanye I love Rick Owens’ bed design but the back is...
+                    My traditional activity has been closed for 2 months, but thanks to this platform I found support to easily translate my physical brand into a digital space and to deliver meals.
                   </p>
                 </template>
               </profile-card>
@@ -114,12 +112,10 @@
             <div class="md-layout-item md-size-33 md-small-size-100">
               <profile-card card-avatar :shadow-normal="false" :no-colored-shadow="false">
                 <template slot="cardContent">
-                  <h4 class="card-title">George West</h4>
-                  <h6 class="card-category text-muted">Backend Hacker</h6>
+                  <h4 class="card-title">Marga Affanes</h4>
+                  <h6 class="card-category text-muted">Digital music school</h6>
                   <p class="card-description">
-                    Don't be scared of the truth because we need to restart the
-                    human foundation in truth And I love you like Kanye loves
-                    Kanye I love Rick Owens’ bed design but the back is...
+                     Our business is based 100% online, we did not see a decrease in demand, but we are brand new and we made a lot investments. Thanks to the help of consultancy  we learnt how to scale up the business.
                   </p>
                 </template>
               </profile-card>
@@ -127,12 +123,10 @@
             <div class="md-layout-item md-size-33 md-small-size-100">
               <profile-card card-avatar :shadow-normal="false" :no-colored-shadow="false">
                 <template slot="cardContent">
-                  <h4 class="card-title">Gina Andrew</h4>
-                  <h6 class="card-category text-muted">Web Designer</h6>
+                  <h4 class="card-title">Baptiste Toubiass</h4>
+                  <h6 class="card-category text-muted">Events speaker</h6>
                   <p class="card-description">
-                    Don't be scared of the truth because we need to restart the
-                    human foundation in truth And I love you like Kanye loves
-                    Kanye I love Rick Owens’ bed design but the back is...
+                    Five conference keynotes and trade shows cancelled within a few days, big revenue generators for the year. Having fast access to capital to overcome the period was my reborn.
                   </p>
                 </template>
               </profile-card>

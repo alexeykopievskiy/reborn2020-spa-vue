@@ -5,6 +5,7 @@
         <md-field>
           <label>Search</label>
           <md-input v-model="search" @input="() => delayInput(this)"></md-input>
+          <div v-if="!companies.length">No results</div>
         </md-field>
       </div>
       <div v-if="companies.length" class="search-result">
