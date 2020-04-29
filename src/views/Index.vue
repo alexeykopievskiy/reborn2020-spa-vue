@@ -31,26 +31,26 @@
           <div class="md-layout">
             <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="info" text-center>
-                <h2 slot="title" class="info-title">0</h2>
+                <h2 slot="title" class="info-title">{{ countAllCompanies }}</h2>
                 <h4 slot="content">Business on platform</h4>
               </info-areas>
             </div>
             <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="info" text-center>
-                <h2 slot="title" class="info-title">0</h2>
+                <h2 slot="title" class="info-title">{{ countJobsDanger }}</h2>
                 <h4 slot="content">Job positions in danger</h4>
               </info-areas>
             </div>
             <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="success" text-center>
-                <h2 slot="title" class="info-title">0</h2>
+                <h2 slot="title" class="info-title">{{ countCompaniesRescued }}</h2>
                 <h4 slot="content">Business rescued</h4>
               </info-areas>
             </div>
             <div class="md-layout-item md-size-25 md-xsmall-size-100">
               <info-areas icon-color="danger" text-center>
-                <h2 slot="title" class="info-title">0</h2>
-                <h4 slot="content">Job positions recued</h4>
+                <h2 slot="title" class="info-title">{{ countJobsRescued }}</h2>
+                <h4 slot="content">Job positions rescued</h4>
               </info-areas>
             </div>
           </div>
@@ -161,6 +161,7 @@ import MapSection from "./components/MapSection";
 import Search from "./components/Search";
 import { InfoAreas } from "@/components";
 import { ProfileCard } from "@/components";
+import { API_SERVER } from "@/API_KEY"
 
 export default {
   name: "Index",
@@ -210,8 +211,20 @@ export default {
       leafShow: false,
       team4: require("@/assets/img/bg7.jpg"),
       team5: require("@/assets/img/examples/city.jpg"),
-      showGDPR: true
+      showGDPR: true,
+      countAllCompanies: 0,
+      countJobsDanger: 0,
+      countCompaniesRescued: 0,
+      countJobsRescued: 0
     };
+  },
+  created() {
+    this.axios.get(`${API_SERVER}:5000/api/v1/counters`).then(result => {
+      this.countAllCompanies = result.data['all_companies']
+      this.countJobsDanger = result.data['jobs_danger']
+      this.countCompaniesRescued = result.data['companies_rescued']
+      this.countJobsRescued = result.data['jobs_rescued']
+    })
   },
   mounted() {
     this.leafActive();
