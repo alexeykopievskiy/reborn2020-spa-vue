@@ -30,21 +30,30 @@
               <md-card-header class="md-card-header-info text-center">
                 <h4 class="card-title">Need help</h4>
               </md-card-header>
-              <md-card-content>
-                <strong>Name: </strong>
+              <md-card-content v-if="loadInfo">
+                <strong>Name:</strong>
                 <span>{{loadInfo.name || '---'}}</span>
                 <br />
-                <strong>Address: </strong>
+                <strong>Address:</strong>
                 <span>{{loadInfo.address || '---'}}</span>
                 <br />
-                <strong>Business: </strong>
+                <strong>Business:</strong>
                 <span>{{loadInfo.business || loadInfo.business_other || '---'}}</span>
                 <br />
-                <strong>Issues: </strong>
+                <strong>Issues:</strong>
                 <span>{{loadInfo.issues || loadInfo.issues_other || '---'}}</span>
                 <br />
-                <strong>Help: </strong>
-                <span>{{loadInfo.help || loadInfo.help_other || '---'}}</span>
+                <strong>Problem:</strong>
+                <span>{{loadInfo.problem || '---'}}</span>
+                <br />
+                <strong>Needs:</strong>
+                <span>{{loadInfo.needs || '---'}}</span>
+                <br />
+                <strong>Number of jobs:</strong>
+                <span>{{loadInfo.jobs || '---'}}</span>
+                <br />
+                <strong>Social:</strong>
+                <span>{{loadInfo.social || '---'}}</span>
               </md-card-content>
             </l-popup>
           </l-marker>
@@ -61,27 +70,24 @@
                 <md-card-header class="md-card-header-info text-center">
                   <h4 class="card-title">Offering help</h4>
                 </md-card-header>
-                <md-card-content v-if="loadInfo">
-                  <strong>Name: </strong>
-                <span>{{loadInfo.name || '---'}}</span>
-                <br />
-                <strong>Address: </strong>
-                <span>{{loadInfo.address || '---'}}</span>
-                <br />
-                <strong>Business: </strong>
-                <span>{{loadInfo.business || loadInfo.business_other || '---'}}</span>
-                <br />
-                <strong>Isseus: </strong>
-                <span>{{loadInfo.issues || loadInfo.issues_other  || '---'}}</span>
-                <br />
-                <strong>Problem: </strong>
-                <span>{{loadInfo.problem || '---'}}</span>
-                <br />
-                <strong>Needs: </strong>
-                <span>{{loadInfo.needs || '---'}}</span>
-                <br />
-                <strong>Number of jobs: </strong>
-                <span>{{loadInfo.jobs || '---'}}</span>
+                <md-card-content>
+                  <strong>Name:</strong>
+                  <span>{{loadInfo.name || '---'}}</span>
+                  <br />
+                  <strong>Address:</strong>
+                  <span>{{loadInfo.address || '---'}}</span>
+                  <br />
+                  <strong>Business:</strong>
+                  <span>{{loadInfo.business || loadInfo.business_other || '---'}}</span>
+                  <br />
+                  <strong>Issues:</strong>
+                  <span>{{loadInfo.issues || loadInfo.issues_other || '---'}}</span>
+                  <br />
+                  <strong>Help:</strong>
+                  <span>{{loadInfo.help || loadInfo.help_other || '---'}}</span>
+                  <br />
+                  <strong>Social:</strong>
+                  <span>{{loadInfo.social || '---'}}</span>
                 </md-card-content>
               </l-popup>
             </l-marker>
@@ -475,8 +481,7 @@ export default {
       this.$refs.map.mapObject.invalidateSize();
       this.address = null;
     },
-    async searchByAddress() {
-    },
+    async searchByAddress() {},
     async submitGetHelp(e) {
       let data = {
         type: "needHelp",
@@ -511,7 +516,6 @@ export default {
       this.current_coords = null;
       this.resizeMap();
       this.showGetHelp = false;
-
     },
     resizeMap() {
       this.center = this.currentCenter;
@@ -529,12 +533,12 @@ export default {
         business_other: this.business_other,
         issues: this.issues,
         issues_other: this.issues_other,
+        help: this.help,
         help_other: this.help_other,
         social: this.social,
         email: this.email,
         phone: this.phone
       };
-
 
       try {
         let response = await this.axios.post(
@@ -559,7 +563,6 @@ export default {
         email: this.email,
         phone: this.phone
       };
-
 
       try {
         let response = await this.axios.post(
@@ -612,7 +615,6 @@ export default {
           this.markersOffer.push(item);
         }
       });
-
     }
   },
   mounted() {

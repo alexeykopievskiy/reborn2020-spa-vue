@@ -103,9 +103,9 @@
                 <template slot="cardContent">
                   <h4 class="card-title">Luigi Patiano</h4>
                   <h6 class="card-category text-muted">Restaurant owner</h6>
-                  <p class="card-description">
-                    My traditional activity has been closed for 2 months, but thanks to this platform I found support to easily translate my physical brand into a digital space and to deliver meals.
-                  </p>
+                  <p
+                    class="card-description"
+                  >My traditional activity has been closed for 2 months, but thanks to this platform I found support to easily translate my physical brand into a digital space and to deliver meals.</p>
                 </template>
               </profile-card>
             </div>
@@ -114,9 +114,9 @@
                 <template slot="cardContent">
                   <h4 class="card-title">Marga Affanes</h4>
                   <h6 class="card-category text-muted">Digital music school</h6>
-                  <p class="card-description">
-                     Our business is based 100% online, we did not see a decrease in demand, but we are brand new and we made a lot investments. Thanks to the help of consultancy  we learnt how to scale up the business.
-                  </p>
+                  <p
+                    class="card-description"
+                  >Our business is based 100% online, we did not see a decrease in demand, but we are brand new and we made a lot investments. Thanks to the help of consultancy we learnt how to scale up the business.</p>
                 </template>
               </profile-card>
             </div>
@@ -125,9 +125,9 @@
                 <template slot="cardContent">
                   <h4 class="card-title">Baptiste Toubiass</h4>
                   <h6 class="card-category text-muted">Events speaker</h6>
-                  <p class="card-description">
-                    Five conference keynotes and trade shows cancelled within a few days, big revenue generators for the year. Having fast access to capital to overcome the period was my reborn.
-                  </p>
+                  <p
+                    class="card-description"
+                  >Five conference keynotes and trade shows cancelled within a few days, big revenue generators for the year. Having fast access to capital to overcome the period was my reborn.</p>
                 </template>
               </profile-card>
             </div>
@@ -135,7 +135,22 @@
         </div>
       </div>
       <!-- end Team 4 -->
-      <Search/>
+      <Search />
+    </div>
+    <div class="gdpr" v-if="showGDPR">
+      <div class="md-layout">
+        <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
+          <h5
+            class="text-center"
+          >Our Company is part of the Our Company Group which includes Our Company International and Our Company Direct. This privacy policy will explain how our organization uses the personal data we collect from you when you use our website.</h5>
+          <h4 class="text-center">If you agree - click "Accept", if not - leave web site</h4>
+        </div>
+        <div class="md-layout-item" style="display: flex">
+          <md-button style="margin: auto"
+                class="md-success" @click="setGDPR"
+              >Accept</md-button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -194,17 +209,23 @@ export default {
       password: null,
       leafShow: false,
       team4: require("@/assets/img/bg7.jpg"),
-      team5: require("@/assets/img/examples/city.jpg")
+      team5: require("@/assets/img/examples/city.jpg"),
+      showGDPR: true
     };
   },
   mounted() {
     this.leafActive();
     window.addEventListener("resize", this.leafActive);
+    this.showGDPR = !localStorage.gdpr
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.leafActive);
   },
   methods: {
+    setGDPR() {
+      localStorage.gdpr = true
+      this.showGDPR = false
+    },
     leafActive() {
       if (window.innerWidth < 768) {
         this.leafShow = false;
@@ -233,8 +254,8 @@ export default {
 
 @media all and (min-width: 600px) {
   .main-raised {
-    margin-left: 50px!important;
-    margin-right: 50px!important;
+    margin-left: 50px !important;
+    margin-right: 50px !important;
   }
   .md-xsmall-size-100 {
     .info {
@@ -247,7 +268,15 @@ export default {
     }
   }
 }
-
+.gdpr {
+  width: 100%;
+  height: 250px;
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  background: #eee;
+  padding: 50px;
+}
 @media all and (min-width: 991px) {
   .btn-container {
     display: flex;
@@ -256,6 +285,9 @@ export default {
 @media all and (max-width: 768px) {
   .vertical-nav-active {
     display: none;
+  }
+  .gdpr {
+    height: auto;
   }
 }
 

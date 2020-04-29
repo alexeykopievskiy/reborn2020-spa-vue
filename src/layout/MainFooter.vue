@@ -12,14 +12,16 @@
         <nav>
           <ul>
             <li>
-              <a href="/about">About</a>
+              <router-link to="/about">About</router-link>
+            </li>
+            <li>
+              <router-link to="/policy">Privacy Policy</router-link>
             </li>
           </ul>
         </nav>
         <div class="copyright">
-          &copy; {{ year }}, made with
-          <md-icon>favorite</md-icon>by
-          Reborn2020
+          &copy; Copyright Team Reborn {{ year }}, made with
+          <md-icon>favorite</md-icon>
           for a better world.
         </div>
       </div>
